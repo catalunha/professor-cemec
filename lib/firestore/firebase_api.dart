@@ -9,6 +9,7 @@ class FirebaseApi {
       final ref = FirebaseStorage.instance.ref(destination);
       return ref.putFile(file);
     } on FirebaseException catch (e) {
+      print('--> erro em uploadFile $e');
       return null;
     }
   }
@@ -18,6 +19,8 @@ class FirebaseApi {
       final ref = FirebaseStorage.instance.ref(destination);
       return ref.putData(data);
     } on FirebaseException catch (e) {
+      print('--> erro em uploadFile $e');
+
       return null;
     }
   }

@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 import 'package:professor/app_state.dart';
 import 'package:professor/upload/upload_state.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -16,16 +18,27 @@ class RestartingStateUploadAction extends ReduxAction<AppState> {
   }
 }
 
+class SetUrlForDownloadUploadAction extends ReduxAction<AppState> {
+  final String url;
+  SetUrlForDownloadUploadAction({required this.url});
+  AppState reduce() {
+    return state.copyWith(
+        uploadState: state.uploadState.copyWith(urlForDownload: url));
+  }
+}
+
 class SelectFileUploadAction extends ReduxAction<AppState> {
   @override
   Future<AppState?> reduce() async {
     dispatch(RestartingStateUploadAction());
     UploadForFirebase uploadFirebase = UploadForFirebase();
     bool status = await uploadFirebase.selectFile();
+
     if (status) {
       return state.copyWith(
         uploadState: state.uploadState.copyWith(
-          selectedLocalFile: uploadFirebase.file,
+          fileName: uploadFirebase.fileName,
+          fileBytes: uploadFirebase.fileBytes,
         ),
       );
     } else {
@@ -35,11 +48,16 @@ class SelectFileUploadAction extends ReduxAction<AppState> {
 }
 
 class UploadingFileUploadAction extends ReduxAction<AppState> {
+  final String pathInFirestore;
+
+  UploadingFileUploadAction({required this.pathInFirestore});
   Future<AppState> reduce() async {
     UploadForFirebase uploadForFirebase = UploadForFirebase();
-    File? file = state.uploadState.selectedLocalFile;
+    String? file = state.uploadState.fileName;
     if (file != null) {
-      UploadTask? task = uploadForFirebase.uploadingFile(file, 'files2');
+      UploadTask? task = uploadForFirebase.uploadingBytes(pathInFirestore,
+          state.uploadState.fileName!, state.uploadState.fileBytes!);
+
       return state.copyWith(
           uploadState: state.uploadState.copyWith(uploadTask: task));
     } else {
@@ -83,7 +101,6 @@ class UpdateUrlForDownloadUploadAction extends ReduxAction<AppState> {
 
 class StreamUploadTask extends ReduxAction<AppState> {
   Future<AppState?> reduce() async {
-    print('StreamUploadTask');
     if (state.uploadState.uploadTask != null) {
       UploadTask uploadTask = state.uploadState.uploadTask!;
       Stream<TaskSnapshot> streamTaskSnapshot = uploadTask.snapshotEvents;
@@ -93,7 +110,6 @@ class StreamUploadTask extends ReduxAction<AppState> {
         print(percentage);
         dispatch(UpdateUploadPorcentageUploadAction(value: percentage));
       });
-      // dispatch(UpdateUrlForDownloadUploadAction());
 
       return null;
     } else {
@@ -106,51 +122,70 @@ class StreamUploadTask extends ReduxAction<AppState> {
 
 class UploadForFirebase {
   File? file;
+  String? fileName;
+  Uint8List? fileBytes;
+  late final FilePickerResult? pickFile;
   Future<bool> selectFile() async {
-    final result = await FilePicker.platform.pickFiles(
+    this.pickFile = await FilePicker.platform.pickFiles(
+      type: FileType.any,
       allowMultiple: false,
     );
-    if (result == null) return false;
-    final path = result.files.single.path!;
+    if (pickFile?.files.first == null) return false;
+    _choiceEnviroment();
+    print('$fileName');
+    return true;
+  }
+
+  void _choiceEnviroment() {
+    if (kIsWeb) {
+      //It's web
+      _fileInWeb();
+    } else if (Platform.isAndroid) {
+      //it's Android
+      _fileInAndroid();
+    }
+  }
+
+  void _fileInWeb() {
+    this.fileBytes = pickFile!.files.first.bytes;
+    this.fileName = pickFile!.files.first.name;
+    print('$fileName');
+  }
+
+  void _fileInAndroid() async {
+    final path = pickFile!.files.single.path!;
 
     file = File(path);
-    return true;
+    this.fileBytes = file!.readAsBytesSync();
+    this.fileName = basename(file!.path);
+    print('$fileName');
   }
 
   UploadTask? uploadingFile(File file, String pathInFirestore) {
     final fileName = basename(file.path);
     final destination = '$pathInFirestore/$fileName';
-    var task = _uploadFile(destination, file);
+    var task;
+    try {
+      final ref = FirebaseStorage.instance.ref(destination);
+      task = ref.putFile(file);
+    } on FirebaseException catch (e) {
+      print('--> uploadingFile error $e');
+      return null;
+    }
     if (task == null) return null;
     return task;
   }
-  // Future<bool> uploadFile(String pathInFirestore) async {
-  //   if (file == null) return false;
-  //   final fileName = basename(file!.path);
-  //   final destination = '$pathInFirestore/$fileName';
-  //   task = _uploadFile(destination, file!);
-  //   if (task == null) return false;
-  //   final snapshot = await task!.whenComplete(() {});
-  //   urlDownload = await snapshot.ref.getDownloadURL();
-  //   return true;
-  //   print('Download-link:$urlDownload');
-  // }
 
-  static UploadTask? _uploadFile(String destination, File file) {
+  UploadTask? uploadingBytes(
+      String pathInFirestore, String fileName, Uint8List fileBytes) {
+    UploadTask? task;
     try {
-      final ref = FirebaseStorage.instance.ref(destination);
-      return ref.putFile(file);
+      final ref = FirebaseStorage.instance.ref('$pathInFirestore/$fileName');
+      task = ref.putData(fileBytes);
     } on FirebaseException catch (e) {
+      print('--> uploadingBytes error $e');
       return null;
     }
-  }
-
-  static UploadTask? _uploadBytes(String destination, Uint8List data) {
-    try {
-      final ref = FirebaseStorage.instance.ref(destination);
-      return ref.putData(data);
-    } on FirebaseException catch (e) {
-      return null;
-    }
+    return task;
   }
 }

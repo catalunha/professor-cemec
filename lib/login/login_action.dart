@@ -50,7 +50,7 @@ class CheckLoginAction extends ReduxAction<AppState> {
             statusFirebaseAuth: StatusFirebaseAuth.authenticated));
         // await Future.delayed(Duration(seconds: 5));
 
-        await dispatch(GetDocUserAsyncUserAction(uid: user.uid));
+        await dispatch(GetDocGoogleAccountUserAction(uid: user.uid));
         print('---> SignInLoginAction: verificado se tem users correspondente');
         print('---> SignInLoginAction: ${state.userState.userCurrent}');
         print('---> SignInLoginAction: state.userState.userCurrent != null');
@@ -81,8 +81,6 @@ class SignOutLoginAction extends ReduxAction<AppState> {
   Future<AppState> reduce() async {
     var google = GoogleSignInOrSignOut();
     var done = await google.googleLogout();
-    // dispatch(ChangeStatusFirebaseAuthLoginAction(
-    //     statusFirebaseAuth: StatusFirebaseAuth.unAuthenticated));
     print('---> SignOutLoginAction: googleLogout $done');
     return state.copyWith(
       userState: UserState.initialState(),

@@ -111,6 +111,6 @@ class AppTextStyles {
   static final captionBoldBody = GoogleFonts.lexendDeca(
     fontSize: 13,
     fontWeight: FontWeight.w600,
-    color: AppColors.body,
+    color: AppColors.input,
   );
 }

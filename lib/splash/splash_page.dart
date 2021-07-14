@@ -28,13 +28,12 @@ class SplashPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Stack(
+        alignment: Alignment.center,
         children: [
           Center(child: Image.asset(AppImages.union)),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // CircularProgressIndicator(),
-              // Center(child: Image.asset(AppImages.logoFull)),
               isUnInitialized
                   ? Text('unInitialized: true')
                   : Text('unInitialized: false'),

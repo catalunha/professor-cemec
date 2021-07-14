@@ -1,67 +1,112 @@
+import 'package:professor/course/course_card.dart';
+import 'package:professor/course/course_model.dart';
+import 'package:professor/module/module_card.dart';
+import 'package:professor/module/module_card_connector.dart';
+import 'package:professor/module/module_model.dart';
 import 'package:professor/theme/app_colors.dart';
 import 'package:professor/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  final String userPhotoUrl;
-  final String userDisplayName;
+class HomePage extends StatelessWidget {
+  final String photoUrl;
+  final String displayName;
+  final String phoneNumber;
+  final String email;
+  final String uid;
+  final String id;
   final VoidCallback signOut;
-
+  final List<ModuleModel> moduleModelList;
   const HomePage({
     Key? key,
-    required this.userPhotoUrl,
-    required this.userDisplayName,
+    required this.photoUrl,
+    required this.displayName,
     required this.signOut,
+    required this.phoneNumber,
+    required this.email,
+    required this.moduleModelList,
+    required this.uid,
+    required this.id,
   }) : super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(125),
-          child: Container(
-            height: 90,
-            color: AppColors.primary,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 30,
-                ),
-                Center(
-                  child: ListTile(
-                    onTap: widget.signOut,
-                    title: Text(
-                      'Olá ${widget.userDisplayName}',
-                      style: AppTextStyles.titleRegular,
-                    ),
-                    trailing: Container(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(125),
+        child: Container(
+          height: 110,
+          color: AppColors.primary,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 30,
+              ),
+              Center(
+                child: ListTile(
+                  onTap: signOut,
+                  title: Text(
+                    'Olá, $displayName',
+                    style: AppTextStyles.titleRegular,
+                  ),
+                  subtitle: Text('Môdulos em que é PROFESSOR.'),
+                  trailing: Tooltip(
+                    message:
+                        'email: $email\nMobile: $phoneNumber\nuid: ${uid.substring(0, 7)}\nid: ${id.substring(0, 7)}',
+                    child: Container(
                       height: 48,
                       width: 48,
                       decoration: BoxDecoration(
-                        color: Colors.black,
                         borderRadius: BorderRadius.circular(5),
                         image: DecorationImage(
-                          image: NetworkImage(widget.userPhotoUrl),
+                          image: NetworkImage(photoUrl),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-        body: Center(
-          child: Text(
-            'Bem vindo ao aplicativo para PROFESSORES de cursos no CEMEC.',
-            style: AppTextStyles.titleHome,
+      ),
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Expanded(
+            flex: 1,
+            child: Align(
+              alignment: Alignment.topRight,
+              child: Wrap(
+                children: [
+                  IconButton(
+                      onPressed: () => Navigator.pushNamed(
+                            context,
+                            '/course_archived',
+                          ),
+                      icon: Icon(Icons.archive))
+                ],
+              ),
+            ),
           ),
-        ));
+          Expanded(
+            flex: 15,
+            child: SingleChildScrollView(
+              child: Column(
+                children: moduleModelList
+                    .map((e) => ModuleCardConnector(
+                          moduleModel: e,
+                        ))
+                    .toList(),
+              ),
+            ),
+          ),
+        ],
+      ),
+      // floatingActionButton: FloatingActionButton(
+      //   child: Icon(Icons.add),
+      //   onPressed: () async {
+      //     Navigator.pushNamed(context, '/course_addedit', arguments: '');
+      //   },
+      // ),
+    );
   }
 }
