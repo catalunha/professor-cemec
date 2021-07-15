@@ -33,7 +33,7 @@ class _ResourcePageState extends State<ResourcePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Recursos deste curso e môdulo'),
+        title: Text('Recursos deste môdulo'),
       ),
       body: Column(
         children: [
@@ -76,6 +76,7 @@ class _ResourcePageState extends State<ResourcePage> {
               ),
             ),
           ),
+
           Container(
             width: double.infinity,
             color: AppColors.input,

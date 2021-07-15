@@ -80,9 +80,9 @@ class HomePage extends StatelessWidget {
                   IconButton(
                       onPressed: () => Navigator.pushNamed(
                             context,
-                            '/course_archived',
+                            '/module_archived',
                           ),
-                      icon: Icon(Icons.archive))
+                      icon: Icon(Icons.archive_outlined))
                 ],
               ),
             ),
@@ -101,12 +101,6 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   child: Icon(Icons.add),
-      //   onPressed: () async {
-      //     Navigator.pushNamed(context, '/course_addedit', arguments: '');
-      //   },
-      // ),
     );
   }
 }

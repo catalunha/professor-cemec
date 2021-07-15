@@ -1,8 +1,5 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:professor/app_state.dart';
-import 'package:professor/course/course_action.dart';
-import 'package:professor/course/course_model.dart';
-import 'package:professor/course/course_state.dart';
 import 'package:professor/home/home_page.dart';
 import 'package:professor/login/login_action.dart';
 

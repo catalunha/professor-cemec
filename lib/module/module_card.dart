@@ -9,12 +9,14 @@ class ModuleCard extends StatelessWidget {
   final ModuleModel moduleModel;
   final UserModel? coordinator;
   final CourseModel? courseModel;
+  final VoidCallback onArchiveModule;
 
   const ModuleCard(
       {Key? key,
       required this.moduleModel,
       required this.coordinator,
-      required this.courseModel})
+      required this.courseModel,
+      required this.onArchiveModule})
       : super(key: key);
 
   @override
@@ -105,6 +107,7 @@ class ModuleCard extends StatelessWidget {
             ),
           ),
           Wrap(
+            spacing: 50,
             children: [
               IconButton(
                 icon: Icon(Icons.view_carousel_outlined),
@@ -112,6 +115,10 @@ class ModuleCard extends StatelessWidget {
                   Navigator.pushNamed(context, '/resource',
                       arguments: moduleModel.id);
                 },
+              ),
+              IconButton(
+                icon: Icon(Icons.send_and_archive),
+                onPressed: onArchiveModule,
               ),
             ],
           )

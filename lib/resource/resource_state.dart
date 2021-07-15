@@ -1,9 +1,11 @@
+import 'package:professor/app_state.dart';
 import 'package:professor/resource/resource_model.dart';
 import 'package:flutter/foundation.dart';
 
 class ResourceState {
   final ResourceModel? resourceModelCurrent;
   final List<ResourceModel>? resourceModelList;
+
   ResourceState({
     this.resourceModelCurrent,
     this.resourceModelList,
