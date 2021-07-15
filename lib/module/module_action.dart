@@ -7,30 +7,6 @@ import 'package:professor/course/course_model.dart';
 import 'package:professor/module/module_model.dart';
 import 'package:professor/user/user_model.dart';
 
-class ReadDocsModuleAction extends ReduxAction<AppState> {
-  @override
-  Future<AppState?> reduce() async {
-    print('--> ReadDocsModuleAction');
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    QuerySnapshot<Map<String, dynamic>> querySnapshot = await firebaseFirestore
-        .collection(ModuleModel.collection)
-        .where('teacherUserId', isEqualTo: state.userState.userCurrent!.id)
-        .where('isDeleted', isEqualTo: false)
-        .get();
-    List<ModuleModel> moduleModelList = [];
-    moduleModelList = querySnapshot.docs
-        .map(
-          (queryDocumentSnapshot) => ModuleModel.fromMap(
-            queryDocumentSnapshot.id,
-            queryDocumentSnapshot.data(),
-          ),
-        )
-        .toList();
-    dispatch(SetModuleModelListModuleAction(moduleModelList: moduleModelList));
-    return null;
-  }
-}
-
 class StreamDocsModuleAction extends ReduxAction<AppState> {
   @override
   Future<AppState?> reduce() async {
@@ -175,25 +151,6 @@ class SetModuleCurrentModuleAction extends ReduxAction<AppState> {
   }
 }
 
-class CreateDocModuleAction extends ReduxAction<AppState> {
-  final ModuleModel moduleModel;
-
-  CreateDocModuleAction({required this.moduleModel});
-
-  @override
-  Future<AppState?> reduce() async {
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    CollectionReference docRef =
-        firebaseFirestore.collection(ModuleModel.collection);
-    await docRef.add(moduleModel.toMap()).then((newModuleRef) {
-      print('--> Add ${newModuleRef.id} em course.moduleOrder');
-      dispatch(UpdateModuleOrderCourseAction(
-          id: newModuleRef.id, isUnionOrRemove: true));
-    });
-    return null;
-  }
-}
-
 class UpdateDocModuleAction extends ReduxAction<AppState> {
   final ModuleModel moduleModel;
 
@@ -205,13 +162,7 @@ class UpdateDocModuleAction extends ReduxAction<AppState> {
     DocumentReference docRef = firebaseFirestore
         .collection(ModuleModel.collection)
         .doc(moduleModel.id);
-    await docRef.update(moduleModel.toMap()).then((value) {
-      if (moduleModel.isDeleted) {
-        print('--> remove ${docRef.id} em course.moduleOrder');
-        dispatch(UpdateModuleOrderCourseAction(
-            id: docRef.id, isUnionOrRemove: false));
-      }
-    });
+    await docRef.update(moduleModel.toMap());
     return null;
   }
 }

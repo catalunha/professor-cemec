@@ -9,14 +9,6 @@ class CourseState {
   static CourseModel? selectCourse(AppState state, String courseId) =>
       state.courseState.courseModelList!
           .firstWhereOrNull((element) => element.id == courseId);
-  static List<CourseModel> selectCourseNotArchived(AppState state) =>
-      state.courseState.courseModelList!
-          .where((element) => element.isArchivedByCoord == false)
-          .toList();
-  static List<CourseModel> selectCourseArchived(AppState state) =>
-      state.courseState.courseModelList!
-          .where((element) => element.isArchivedByCoord == true)
-          .toList();
   CourseState({
     this.courseModelCurrent,
     this.courseModelList,

@@ -86,6 +86,9 @@ class _ResourcePageState extends State<ResourcePage> {
               style: AppTextStyles.titleBoldHeading,
             ),
           ),
+          SizedBox(
+            height: 10,
+          ),
           Expanded(
             child: ReorderableListView(
               scrollDirection: Axis.vertical,
@@ -93,9 +96,9 @@ class _ResourcePageState extends State<ResourcePage> {
               children: buildItens(context),
             ),
           ),
-          SizedBox(
-            height: 40,
-          )
+          // SizedBox(
+          //   height: 40,
+          // )
           // Padding(
           //   padding: const EdgeInsets.only(left: 8, top: 4, right: 8),
           //   child: Card(

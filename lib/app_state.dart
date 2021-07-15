@@ -4,7 +4,6 @@ import 'package:professor/course/course_state.dart';
 import 'package:professor/login/login_state.dart';
 import 'package:professor/module/module_state.dart';
 import 'package:professor/resource/resource_state.dart';
-import 'package:professor/teacher/teacher_state.dart';
 import 'package:professor/upload/upload_state.dart';
 import 'package:professor/user/user_state.dart';
 
@@ -12,7 +11,6 @@ class AppState {
   final Wait wait;
   final LoginState loginState;
   final UserState userState;
-  final TeacherState teacherState;
   final CoordinatorState coordinatorState;
   final UploadState uploadState;
   final CourseState courseState;
@@ -22,7 +20,6 @@ class AppState {
     required this.wait,
     required this.loginState,
     required this.userState,
-    required this.teacherState,
     required this.coordinatorState,
     required this.uploadState,
     required this.courseState,
@@ -34,7 +31,6 @@ class AppState {
         wait: Wait(),
         loginState: LoginState.initialState(),
         userState: UserState.initialState(),
-        teacherState: TeacherState.initialState(),
         coordinatorState: CoordinatorState.initialState(),
         uploadState: UploadState.initialState(),
         courseState: CourseState.initialState(),
@@ -45,7 +41,6 @@ class AppState {
     Wait? wait,
     LoginState? loginState,
     UserState? userState,
-    TeacherState? teacherState,
     CoordinatorState? coordinatorState,
     UploadState? uploadState,
     CourseState? courseState,
@@ -56,7 +51,6 @@ class AppState {
       wait: wait ?? this.wait,
       loginState: loginState ?? this.loginState,
       userState: userState ?? this.userState,
-      teacherState: teacherState ?? this.teacherState,
       coordinatorState: coordinatorState ?? this.coordinatorState,
       uploadState: uploadState ?? this.uploadState,
       courseState: courseState ?? this.courseState,
@@ -74,7 +68,6 @@ class AppState {
         other.courseState == courseState &&
         other.uploadState == uploadState &&
         other.loginState == loginState &&
-        other.teacherState == teacherState &&
         other.coordinatorState == coordinatorState &&
         other.userState == userState &&
         other.resourceState == resourceState &&
@@ -89,7 +82,6 @@ class AppState {
         loginState.hashCode ^
         userState.hashCode ^
         coordinatorState.hashCode ^
-        teacherState.hashCode ^
         resourceState.hashCode ^
         wait.hashCode;
   }

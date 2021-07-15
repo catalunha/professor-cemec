@@ -1,4 +1,3 @@
-import 'package:professor/app_state.dart';
 import 'package:professor/resource/resource_model.dart';
 import 'package:flutter/foundation.dart';
 

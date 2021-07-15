@@ -1,6 +1,3 @@
-import 'package:professor/course/course_card.dart';
-import 'package:professor/course/course_model.dart';
-import 'package:professor/module/module_card.dart';
 import 'package:professor/module/module_card_connector.dart';
 import 'package:professor/module/module_model.dart';
 import 'package:professor/theme/app_colors.dart';

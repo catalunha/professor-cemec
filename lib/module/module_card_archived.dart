@@ -1,4 +1,3 @@
-import 'package:professor/course/course_model.dart';
 import 'package:flutter/material.dart';
 import 'package:professor/module/module_model.dart';
 

@@ -32,15 +32,19 @@ class ResourceCard extends StatelessWidget {
                     }
                   }
                 : null,
-            trailing: IconButton(
-              icon: Icon(Icons.edit),
-              onPressed: () async {
-                Navigator.pushNamed(context, '/resource_addedit',
-                    arguments: resourceModel.id);
-              },
-            ),
           ),
           Text(resourceModel.id),
+          Wrap(
+            children: [
+              IconButton(
+                icon: Icon(Icons.edit),
+                onPressed: () async {
+                  Navigator.pushNamed(context, '/resource_addedit',
+                      arguments: resourceModel.id);
+                },
+              ),
+            ],
+          )
         ],
       ),
     );
