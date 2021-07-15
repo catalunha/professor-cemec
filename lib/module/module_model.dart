@@ -34,7 +34,7 @@ class ModuleModel extends FirestoreModel {
     String? syllabus,
     bool? isArchivedByProf,
     bool? isDeleted,
-    String? teacherUserId = '',
+    String? teacherUserId,
     bool teacherUserIdNull = false,
     List<String>? resourceOrder,
   }) {

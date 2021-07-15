@@ -3,15 +3,17 @@ import 'package:professor/course/course_model.dart';
 import 'package:professor/module/module_model.dart';
 import 'package:professor/resource/resource_card.dart';
 import 'package:professor/resource/resource_model.dart';
+import 'package:professor/theme/app_colors.dart';
 import 'package:professor/theme/app_text_styles.dart';
 import 'package:professor/user/user_model.dart';
 import 'package:flutter/material.dart';
 
-class ResourcePage extends StatelessWidget {
+class ResourcePage extends StatefulWidget {
   final UserModel? coordinator;
   final CourseModel? courseModel;
   final ModuleModel moduleModel;
   final List<ResourceModel> resourceModelList;
+  final Function(List<String>) onChangeResourceOrder;
 
   const ResourcePage({
     Key? key,
@@ -19,8 +21,14 @@ class ResourcePage extends StatelessWidget {
     required this.courseModel,
     required this.moduleModel,
     this.coordinator,
+    required this.onChangeResourceOrder,
   }) : super(key: key);
 
+  @override
+  _ResourcePageState createState() => _ResourcePageState();
+}
+
+class _ResourcePageState extends State<ResourcePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,13 +42,13 @@ class ResourcePage extends StatelessWidget {
             child: Card(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15)),
-              color: Colors.lightBlue,
+              // color: AppColors.secondary,
               elevation: 10,
               child: Column(
                 children: [
-                  courseModel != null
+                  widget.courseModel != null
                       ? ListTile(
-                          leading: courseModel!.iconUrl == null
+                          leading: widget.courseModel!.iconUrl == null
                               ? Icon(Icons.favorite_outline_rounded)
                               : Container(
                                   height: 48,
@@ -48,18 +56,19 @@ class ResourcePage extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
                                     image: DecorationImage(
-                                      image:
-                                          NetworkImage(courseModel!.iconUrl!),
+                                      image: NetworkImage(
+                                          widget.courseModel!.iconUrl!),
                                     ),
                                   ),
                                 ),
-                          title: Text(courseModel!.title),
+                          title: Text(widget.courseModel!.title),
+                          subtitle: Text(widget.courseModel!.id),
                         )
                       : ListTile(
                           leading: Icon(Icons.desktop_access_disabled_sharp),
                         ),
-                  coordinator != null
-                      ? CoordinatorTile(coordinator: coordinator!)
+                  widget.coordinator != null
+                      ? CoordinatorTile(coordinator: widget.coordinator!)
                       : ListTile(
                           leading: Icon(Icons.person_off_outlined),
                         ),
@@ -67,40 +76,90 @@ class ResourcePage extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8, top: 4, right: 8),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              elevation: 10,
-              color: Colors.lightBlueAccent,
-              child: Column(
-                children: [
-                  Text(
-                    moduleModel.title,
-                    style: AppTextStyles.titleBoldHeading,
-                  ),
-                ],
-              ),
+          Container(
+            width: double.infinity,
+            color: AppColors.input,
+            alignment: Alignment.topCenter,
+            child: Text(
+              widget.moduleModel.title,
+              style: AppTextStyles.titleBoldHeading,
             ),
           ),
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: resourceModelList
-                    .map((e) => ResourceCard(resourceModel: e))
-                    .toList(),
-              ),
+            child: ReorderableListView(
+              scrollDirection: Axis.vertical,
+              onReorder: _onReorder,
+              children: buildItens(context),
             ),
           ),
+          SizedBox(
+            height: 40,
+          )
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 8, top: 4, right: 8),
+          //   child: Card(
+          //     shape: RoundedRectangleBorder(
+          //         borderRadius: BorderRadius.circular(25)),
+          //     elevation: 10,
+          //     color: Colors.lightBlueAccent,
+          //     child: Column(
+          //       children: [
+          //         Text(
+          //           moduleModel.title,
+          //           style: AppTextStyles.titleBoldHeading,
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          // Expanded(
+          //   child: SingleChildScrollView(
+          //     child: Column(
+          //       children: widget.resourceModelList
+          //           .map((e) => ResourceCard(resourceModel: e))
+          //           .toList(),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () async {
-          // Navigator.pushNamed(context, '/course_addedit', arguments: '');
+          Navigator.pushNamed(context, '/resource_addedit', arguments: '');
         },
       ),
     );
+  }
+
+  buildItens(context) {
+    List<Widget> list = [];
+    Map<String, ResourceModel> map = Map.fromIterable(
+      widget.resourceModelList,
+      key: (element) => element.id,
+      value: (element) => element,
+    );
+    for (var index in widget.moduleModel.resourceOrder!) {
+      if (map[index] != null) {
+        list.add(Container(
+            key: ValueKey(index),
+            child: ResourceCard(resourceModel: map[index]!)));
+      }
+    }
+    setState(() {});
+    return list;
+  }
+
+  void _onReorder(int oldIndex, int newIndex) {
+    setState(() {
+      if (newIndex > oldIndex) {
+        newIndex -= 1;
+      }
+    });
+    List<String> resourceOrderTemp = widget.moduleModel.resourceOrder!;
+    String resourceId = resourceOrderTemp[oldIndex];
+    resourceOrderTemp.removeAt(oldIndex);
+    resourceOrderTemp.insert(newIndex, resourceId);
+    widget.onChangeResourceOrder(resourceOrderTemp);
   }
 }

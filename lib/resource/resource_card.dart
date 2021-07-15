@@ -26,15 +26,21 @@ class ResourceCard extends StatelessWidget {
             subtitle: Text('${resourceModel.description}'),
             onTap: resourceModel.url != null && resourceModel.url!.isNotEmpty
                 ? () async {
-                    if (resourceModel.url != null) {
-                      bool can = await canLaunch(resourceModel.url!);
-                      if (can) {
-                        await launch(resourceModel.url!);
-                      }
+                    bool can = await canLaunch(resourceModel.url!);
+                    if (can) {
+                      await launch(resourceModel.url!);
                     }
                   }
                 : null,
+            trailing: IconButton(
+              icon: Icon(Icons.edit),
+              onPressed: () async {
+                Navigator.pushNamed(context, '/resource_addedit',
+                    arguments: resourceModel.id);
+              },
+            ),
           ),
+          Text(resourceModel.id),
         ],
       ),
     );

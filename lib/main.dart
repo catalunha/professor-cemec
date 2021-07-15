@@ -24,10 +24,10 @@ class MyApp extends StatelessWidget {
     return StoreProvider<AppState>(
       store: store,
       child: MaterialApp(
-        title: 'cemec professor',
+        title: 'CEMEC Professor',
         theme: ThemeData(
           primaryColor: AppColors.primary,
-          primarySwatch: Colors.orange,
+          primarySwatch: Colors.lightGreen,
         ),
         navigatorKey: navigatorKey,
         routes: Routes.routes,

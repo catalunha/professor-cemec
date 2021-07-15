@@ -77,6 +77,10 @@ class SetModuleModelListModuleAction extends ReduxAction<AppState> {
   }
 
   void after() {
+    if (state.moduleState.moduleModelCurrent != null) {
+      dispatch(SetModuleCurrentModuleAction(
+          id: state.moduleState.moduleModelCurrent!.id));
+    }
     dispatch(ReadDocCourseOfModuleListModuleAction());
   }
 }
@@ -164,6 +168,11 @@ class SetModuleCurrentModuleAction extends ReduxAction<AppState> {
       ),
     );
   }
+
+  void after() {
+    dispatch(SetCourseCurrentCourseAction(
+        id: state.moduleState.moduleModelCurrent!.courseId));
+  }
 }
 
 class CreateDocModuleAction extends ReduxAction<AppState> {
@@ -176,10 +185,10 @@ class CreateDocModuleAction extends ReduxAction<AppState> {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     CollectionReference docRef =
         firebaseFirestore.collection(ModuleModel.collection);
-    await docRef.add(moduleModel.toMap()).then((docRef) {
-      print('--> Add ${docRef.id} em course.moduleOrder');
-      dispatch(
-          UpdateModuleOrderCourseAction(id: docRef.id, isUnionOrRemove: true));
+    await docRef.add(moduleModel.toMap()).then((newModuleRef) {
+      print('--> Add ${newModuleRef.id} em course.moduleOrder');
+      dispatch(UpdateModuleOrderCourseAction(
+          id: newModuleRef.id, isUnionOrRemove: true));
     });
     return null;
   }
@@ -203,6 +212,33 @@ class UpdateDocModuleAction extends ReduxAction<AppState> {
             id: docRef.id, isUnionOrRemove: false));
       }
     });
+    return null;
+  }
+}
+
+class UpdateResourceOrderModuleAction extends ReduxAction<AppState> {
+  final String id;
+  final bool isUnionOrRemove;
+  UpdateResourceOrderModuleAction({
+    required this.id,
+    required this.isUnionOrRemove,
+  });
+  @override
+  Future<AppState?> reduce() async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    DocumentReference docRef = firebaseFirestore
+        .collection(ModuleModel.collection)
+        .doc(state.moduleState.moduleModelCurrent!.id);
+
+    if (isUnionOrRemove) {
+      await docRef.update({
+        'resourceOrder': FieldValue.arrayUnion([id])
+      });
+    } else {
+      await docRef.update({
+        'resourceOrder': FieldValue.arrayRemove([id])
+      });
+    }
     return null;
   }
 }

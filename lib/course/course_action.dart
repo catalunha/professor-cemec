@@ -2,6 +2,7 @@ import 'package:async_redux/async_redux.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:professor/app_state.dart';
+import 'package:professor/coordinator/coordinator_action.dart';
 import 'package:professor/course/course_model.dart';
 
 class SetCourseCurrentCourseAction extends ReduxAction<AppState> {
@@ -32,6 +33,11 @@ class SetCourseCurrentCourseAction extends ReduxAction<AppState> {
         courseModelCurrent: courseModel,
       ),
     );
+  }
+
+  void after() {
+    dispatch(SetCoordinatorCurrentCoordinatorAction(
+        id: store.state.courseState.courseModelCurrent!.coordinatorUserId));
   }
 }
 

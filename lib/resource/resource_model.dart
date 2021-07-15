@@ -7,12 +7,14 @@ class ResourceModel extends FirestoreModel {
   final String moduleId;
   final String title;
   final String description;
+  final bool isDeleted;
   final String? url;
   ResourceModel(
     String id, {
     required this.moduleId,
     required this.title,
     required this.description,
+    required this.isDeleted,
     this.url,
   }) : super(id);
 
@@ -20,14 +22,17 @@ class ResourceModel extends FirestoreModel {
     String? moduleId,
     String? title,
     String? description,
+    bool? isDeleted,
     String? url,
+    bool urlIsNull = false,
   }) {
     return ResourceModel(
       this.id,
       moduleId: moduleId ?? this.moduleId,
       title: title ?? this.title,
       description: description ?? this.description,
-      url: url ?? this.url,
+      isDeleted: isDeleted ?? this.isDeleted,
+      url: urlIsNull ? null : url ?? this.url,
     );
   }
 
@@ -36,6 +41,7 @@ class ResourceModel extends FirestoreModel {
       'moduleId': moduleId,
       'title': title,
       'description': description,
+      'isDeleted': isDeleted,
       'url': url,
     };
   }
@@ -46,6 +52,7 @@ class ResourceModel extends FirestoreModel {
       moduleId: map['moduleId'],
       title: map['title'],
       description: map['description'],
+      isDeleted: map['isDeleted'] ?? false,
       url: map['url'],
     );
   }
@@ -57,7 +64,7 @@ class ResourceModel extends FirestoreModel {
 
   @override
   String toString() {
-    return 'ResourceModel(moduleId: $moduleId, title: $title, description: $description, url: $url)';
+    return 'ResourceModel(moduleId: $moduleId, title: $title, description: $description, url: $url, isDeleted: $isDeleted)';
   }
 
   @override
@@ -68,6 +75,7 @@ class ResourceModel extends FirestoreModel {
         other.moduleId == moduleId &&
         other.title == title &&
         other.description == description &&
+        other.isDeleted == isDeleted &&
         other.url == url;
   }
 
@@ -76,6 +84,7 @@ class ResourceModel extends FirestoreModel {
     return moduleId.hashCode ^
         title.hashCode ^
         description.hashCode ^
+        isDeleted.hashCode ^
         url.hashCode;
   }
 }

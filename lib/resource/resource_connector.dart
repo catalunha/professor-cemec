@@ -1,6 +1,4 @@
 import 'package:async_redux/async_redux.dart';
-import 'package:professor/coordinator/coordinator_action.dart';
-import 'package:professor/course/course_action.dart';
 import 'package:professor/course/course_model.dart';
 import 'package:professor/module/module_action.dart';
 import 'package:professor/module/module_model.dart';
@@ -24,10 +22,11 @@ class ResourceConnector extends StatelessWidget {
     return StoreConnector<AppState, ResourceViewModel>(
       onInit: (store) async {
         await store.dispatch(SetModuleCurrentModuleAction(id: moduleId));
-        await store.dispatch(SetCourseCurrentCourseAction(
-            id: store.state.moduleState.moduleModelCurrent!.courseId));
-        store.dispatch(SetCoordinatorCurrentCoordinatorAction(
-            id: store.state.courseState.courseModelCurrent!.coordinatorUserId));
+        // por cascate in after segue SetCourseCurrentCourseAction e SetCoordinatorCurrentCoordinatorAction
+        // await store.dispatch(SetCourseCurrentCourseAction(
+        //     id: store.state.moduleState.moduleModelCurrent!.courseId));
+        // store.dispatch(SetCoordinatorCurrentCoordinatorAction(
+        //     id: store.state.courseState.courseModelCurrent!.coordinatorUserId));
 
         store.dispatch(StreamDocsResourceAction());
       },
@@ -37,6 +36,7 @@ class ResourceConnector extends StatelessWidget {
         courseModel: vm.courseModel,
         moduleModel: vm.moduleModel,
         resourceModelList: vm.resourceModelList,
+        onChangeResourceOrder: vm.onChangeResourceOrder,
       ),
     );
   }
@@ -45,10 +45,16 @@ class ResourceConnector extends StatelessWidget {
 class ResourceFactory extends VmFactory<AppState, ResourceConnector> {
   ResourceFactory(widget) : super(widget);
   ResourceViewModel fromStore() => ResourceViewModel(
-      moduleModel: state.moduleState.moduleModelCurrent!,
-      resourceModelList: state.resourceState.resourceModelList!,
-      coordinator: state.coordinatorState.coordinatorCurrent,
-      courseModel: state.courseState.courseModelCurrent);
+        moduleModel: state.moduleState.moduleModelCurrent!,
+        resourceModelList: state.resourceState.resourceModelList!,
+        coordinator: state.coordinatorState.coordinatorCurrent,
+        courseModel: state.courseState.courseModelCurrent,
+        onChangeResourceOrder: (List<String> resourceOrder) {
+          ModuleModel moduleModel = state.moduleState.moduleModelCurrent!;
+          moduleModel = moduleModel.copyWith(resourceOrder: resourceOrder);
+          dispatch(UpdateDocModuleAction(moduleModel: moduleModel));
+        },
+      );
 }
 
 class ResourceViewModel extends Vm {
@@ -56,12 +62,18 @@ class ResourceViewModel extends Vm {
   final CourseModel? courseModel;
   final ModuleModel moduleModel;
   final List<ResourceModel> resourceModelList;
+  final Function(List<String>) onChangeResourceOrder;
 
   ResourceViewModel({
     required this.resourceModelList,
     required this.courseModel,
     required this.moduleModel,
+    required this.onChangeResourceOrder,
     this.coordinator,
-  }) : super(
-            equals: [resourceModelList, courseModel, moduleModel, coordinator]);
+  }) : super(equals: [
+          resourceModelList,
+          courseModel,
+          moduleModel,
+          coordinator,
+        ]);
 }
