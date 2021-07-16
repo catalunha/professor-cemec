@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
                     'Olá, $displayName',
                     style: AppTextStyles.titleRegular,
                   ),
-                  subtitle: Text('Môdulos em que é PROFESSOR.'),
+                  subtitle: Text('Môdulos em que você é PROFESSOR.'),
                   trailing: Tooltip(
                     message:
                         'email: $email\nMobile: $phoneNumber\nuid: ${uid.substring(0, 7)}\nid: ${id.substring(0, 7)}',
