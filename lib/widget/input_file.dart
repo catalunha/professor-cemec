@@ -1,5 +1,6 @@
 import 'package:professor/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:professor/theme/app_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InputFile extends StatelessWidget {
@@ -37,11 +38,10 @@ class InputFile extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Icon(
-                  Icons.find_in_page_outlined,
+                  AppIconData.attachFile,
                   color: AppColors.primary,
                 ),
               ),
-              // Icon(Icons.find_in_page_outlined),
               Container(
                 width: 1,
                 height: 48,
@@ -49,16 +49,16 @@ class InputFile extends StatelessWidget {
               ),
               Expanded(
                 child: Column(
-                  // mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     ListTile(
-                      leading: Icon(Icons.attach_file),
+                      leading: Icon(AppIconData.search),
                       title: Text('1º Selecione o arquivo'),
                       subtitle: Text(selectedLocalFileName),
                       onTap: selectLocalFile,
                     ),
                     ListTile(
-                      leading: Icon(Icons.cloud_upload_outlined),
+                      leading: Icon(AppIconData.saveInCloud),
                       title: Text('2º Envie para a núvem'),
                       subtitle: urlForDownload.isNotEmpty
                           ? Text('Envio finalizado')
@@ -68,7 +68,7 @@ class InputFile extends StatelessWidget {
                           Text('${percentageOfUpload.toStringAsFixed(2)}'),
                     ),
                     ListTile(
-                      leading: Icon(Icons.link),
+                      leading: Icon(AppIconData.linkOn),
                       title: Text('3º Confira o arquivo em núvem'),
                       subtitle: Text(urlForDownload),
                       onTap: () async {

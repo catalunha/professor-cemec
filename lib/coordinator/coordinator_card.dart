@@ -1,3 +1,4 @@
+import 'package:professor/theme/app_icon.dart';
 import 'package:professor/user/user_model.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class CoordinatorTile extends StatelessWidget {
     return coordinator != null
         ? ListTile(
             leading: coordinator!.photoURL == null
-                ? Icon(Icons.person_pin_outlined)
+                ? Icon(AppIconData.undefined)
                 : Tooltip(
                     message: 'id: ${coordinator!.id}',
                     child: Container(

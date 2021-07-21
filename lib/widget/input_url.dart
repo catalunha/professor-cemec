@@ -1,4 +1,5 @@
 import 'package:professor/theme/app_colors.dart';
+import 'package:professor/theme/app_icon.dart';
 import 'package:professor/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class InputUrl extends StatelessWidget {
   const InputUrl({
     Key? key,
     required this.label,
-    this.icon = Icons.link,
+    this.icon = AppIconData.linkOn,
     this.initialValue,
     this.validator,
     this.controller,

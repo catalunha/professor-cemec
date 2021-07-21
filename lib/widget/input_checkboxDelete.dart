@@ -1,5 +1,6 @@
 import 'package:professor/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:professor/theme/app_icon.dart';
 
 class InputCheckBoxDelete extends StatelessWidget {
   final String title;
@@ -31,7 +32,7 @@ class InputCheckBoxDelete extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Icon(
-                Icons.delete_forever_outlined,
+                AppIconData.delete,
                 color: AppColors.delete,
               ),
             ),

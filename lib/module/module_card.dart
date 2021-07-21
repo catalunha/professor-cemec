@@ -1,6 +1,7 @@
 import 'package:professor/coordinator/coordinator_card.dart';
 import 'package:professor/course/course_model.dart';
 import 'package:professor/module/module_model.dart';
+import 'package:professor/theme/app_icon.dart';
 import 'package:professor/theme/app_text_styles.dart';
 import 'package:professor/user/user_model.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class ModuleCard extends StatelessWidget {
           courseModel != null
               ? ListTile(
                   leading: courseModel!.iconUrl == null
-                      ? Icon(Icons.favorite_outline_rounded)
+                      ? Icon(AppIconData.undefined)
                       : Container(
                           height: 48,
                           width: 48,
@@ -57,7 +58,7 @@ class ModuleCard extends StatelessWidget {
           coordinator != null
               ? CoordinatorTile(coordinator: coordinator!)
               : ListTile(
-                  leading: Icon(Icons.person_off_outlined),
+                  leading: Icon(AppIconData.undefined),
                 ),
           Padding(
             padding: const EdgeInsets.only(left: 10),
@@ -111,7 +112,7 @@ class ModuleCard extends StatelessWidget {
             children: [
               IconButton(
                 tooltip: 'Editar recursos deste môdulo',
-                icon: Icon(Icons.view_carousel_outlined),
+                icon: Icon(AppIconData.resourse),
                 onPressed: () async {
                   Navigator.pushNamed(context, '/resource',
                       arguments: moduleModel.id);
@@ -119,7 +120,7 @@ class ModuleCard extends StatelessWidget {
               ),
               IconButton(
                 tooltip: 'Arquivar este môdulo',
-                icon: Icon(Icons.send_and_archive),
+                icon: Icon(AppIconData.archived),
                 onPressed: onArchiveModule,
               ),
             ],

@@ -4,6 +4,7 @@ import 'package:professor/module/module_model.dart';
 import 'package:professor/resource/resource_card.dart';
 import 'package:professor/resource/resource_model.dart';
 import 'package:professor/theme/app_colors.dart';
+import 'package:professor/theme/app_icon.dart';
 import 'package:professor/theme/app_text_styles.dart';
 import 'package:professor/user/user_model.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class _ResourcePageState extends State<ResourcePage> {
                   widget.courseModel != null
                       ? ListTile(
                           leading: widget.courseModel!.iconUrl == null
-                              ? Icon(Icons.favorite_outline_rounded)
+                              ? Icon(AppIconData.undefined)
                               : Container(
                                   height: 48,
                                   width: 48,
@@ -65,12 +66,12 @@ class _ResourcePageState extends State<ResourcePage> {
                           subtitle: Text(widget.courseModel!.id),
                         )
                       : ListTile(
-                          leading: Icon(Icons.desktop_access_disabled_sharp),
+                          leading: Icon(AppIconData.undefined),
                         ),
                   widget.coordinator != null
                       ? CoordinatorTile(coordinator: widget.coordinator!)
                       : ListTile(
-                          leading: Icon(Icons.person_off_outlined),
+                          leading: Icon(AppIconData.undefined),
                         ),
                 ],
               ),
@@ -128,7 +129,7 @@ class _ResourcePageState extends State<ResourcePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: Icon(AppIconData.addInCloud),
         onPressed: () async {
           Navigator.pushNamed(context, '/resource_addedit', arguments: '');
         },

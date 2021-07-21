@@ -1,5 +1,6 @@
 import 'package:professor/resource/resource_addedit_connector.dart';
 import 'package:professor/resource/resource_model.dart';
+import 'package:professor/theme/app_icon.dart';
 import 'package:professor/widget/input_checkboxDelete.dart';
 import 'package:professor/widget/input_description.dart';
 import 'package:professor/widget/input_file_connector.dart';
@@ -52,7 +53,6 @@ class _ResourceAddEditPageState extends State<ResourceAddEditPage> {
                   label: 'Título do recurso',
                   initialValue: formController.resourceModel.title,
                   validator: formController.validateRequiredText,
-                  // icon: Icons.text_format,
                   onChanged: (value) {
                     formController.onChange(title: value);
                   },
@@ -61,7 +61,6 @@ class _ResourceAddEditPageState extends State<ResourceAddEditPage> {
                   label: 'Descrição do recurso',
                   initialValue: formController.resourceModel.description,
                   validator: formController.validateRequiredText,
-                  // icon: Icons.text_snippet_outlined,
                   onChanged: (value) {
                     formController.onChange(description: value);
                   },
@@ -110,7 +109,6 @@ class _ResourceAddEditPageState extends State<ResourceAddEditPage> {
                         validator: urlOrFile.empty != urlOrFileSelected
                             ? formController.validateUrl
                             : null,
-                        // icon: Icons.link,
                         onChanged: (value) async {
                           formController.onChange(url: value);
                         },
@@ -139,7 +137,7 @@ class _ResourceAddEditPageState extends State<ResourceAddEditPage> {
             )),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.cloud_upload_outlined),
+        child: Icon(AppIconData.saveInCloud),
         onPressed: () {
           formController.onCkechValidation();
           if (formController.isFormValid) {

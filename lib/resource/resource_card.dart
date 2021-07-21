@@ -1,5 +1,6 @@
 import 'package:professor/resource/resource_model.dart';
 import 'package:flutter/material.dart';
+import 'package:professor/theme/app_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ResourceCard extends StatelessWidget {
@@ -20,8 +21,8 @@ class ResourceCard extends StatelessWidget {
         children: [
           ListTile(
             leading: resourceModel.url != null && resourceModel.url!.isNotEmpty
-                ? Icon(Icons.link)
-                : Icon(Icons.link_off),
+                ? Icon(AppIconData.linkOn)
+                : Icon(AppIconData.linkOff),
             title: Text('${resourceModel.title}'),
             subtitle: Text('${resourceModel.description}'),
             onTap: resourceModel.url != null && resourceModel.url!.isNotEmpty
@@ -38,7 +39,7 @@ class ResourceCard extends StatelessWidget {
             children: [
               IconButton(
                 tooltip: 'Editar este recurso',
-                icon: Icon(Icons.edit),
+                icon: Icon(AppIconData.edit),
                 onPressed: () async {
                   Navigator.pushNamed(context, '/resource_addedit',
                       arguments: resourceModel.id);

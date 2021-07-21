@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:professor/module/module_model.dart';
+import 'package:professor/theme/app_icon.dart';
 
 class ModuleCardArchived extends StatelessWidget {
   final ModuleModel moduleModel;
@@ -35,7 +36,7 @@ class ModuleCardArchived extends StatelessWidget {
             children: [
               IconButton(
                 tooltip: 'Retirar este môdulo do arquivo',
-                icon: Icon(Icons.upcoming),
+                icon: Icon(AppIconData.unArchive),
                 onPressed: () {
                   unArchived(moduleModel.id);
                   Navigator.pop(context);

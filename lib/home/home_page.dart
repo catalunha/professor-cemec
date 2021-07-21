@@ -1,6 +1,7 @@
 import 'package:professor/module/module_card_connector.dart';
 import 'package:professor/module/module_model.dart';
 import 'package:professor/theme/app_colors.dart';
+import 'package:professor/theme/app_icon.dart';
 import 'package:professor/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -80,7 +81,7 @@ class HomePage extends StatelessWidget {
                             context,
                             '/module_archived',
                           ),
-                      icon: Icon(Icons.archive_outlined))
+                      icon: Icon(AppIconData.archived))
                 ],
               ),
             ),
