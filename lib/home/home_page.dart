@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
                     'Olá, $displayName',
                     style: AppTextStyles.titleRegular,
                   ),
-                  subtitle: Text('Môdulos em que você é PROFESSOR.'),
+                  subtitle: Text('Môdulos em que você é PROFESSOR(A).'),
                   trailing: Tooltip(
                     message:
                         'email: $email\nMobile: $phoneNumber\nuid: ${uid.substring(0, 7)}\nid: ${id.substring(0, 7)}',
@@ -75,6 +75,7 @@ class HomePage extends StatelessWidget {
               child: Wrap(
                 children: [
                   IconButton(
+                      tooltip: 'Ir para môdulos arquivados',
                       onPressed: () => Navigator.pushNamed(
                             context,
                             '/module_archived',

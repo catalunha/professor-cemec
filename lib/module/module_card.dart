@@ -110,6 +110,7 @@ class ModuleCard extends StatelessWidget {
             spacing: 50,
             children: [
               IconButton(
+                tooltip: 'Editar recursos deste môdulo',
                 icon: Icon(Icons.view_carousel_outlined),
                 onPressed: () async {
                   Navigator.pushNamed(context, '/resource',
@@ -117,6 +118,7 @@ class ModuleCard extends StatelessWidget {
                 },
               ),
               IconButton(
+                tooltip: 'Arquivar este môdulo',
                 icon: Icon(Icons.send_and_archive),
                 onPressed: onArchiveModule,
               ),

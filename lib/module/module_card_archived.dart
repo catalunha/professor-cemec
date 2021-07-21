@@ -34,6 +34,7 @@ class ModuleCardArchived extends StatelessWidget {
           Wrap(
             children: [
               IconButton(
+                tooltip: 'Retirar este môdulo do arquivo',
                 icon: Icon(Icons.upcoming),
                 onPressed: () {
                   unArchived(moduleModel.id);

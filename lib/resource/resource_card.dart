@@ -37,6 +37,7 @@ class ResourceCard extends StatelessWidget {
           Wrap(
             children: [
               IconButton(
+                tooltip: 'Editar este recurso',
                 icon: Icon(Icons.edit),
                 onPressed: () async {
                   Navigator.pushNamed(context, '/resource_addedit',
