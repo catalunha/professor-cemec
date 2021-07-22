@@ -4,8 +4,8 @@ import 'package:professor/course/controller/course_state.dart';
 import 'package:professor/login/controller/login_state.dart';
 import 'package:professor/module/controller/module_state.dart';
 import 'package:professor/resource/controller/resource_state.dart';
-import 'package:professor/upload/upload_state.dart';
-import 'package:professor/user/user_state.dart';
+import 'package:professor/upload/controller/upload_state.dart';
+import 'package:professor/user/controller/user_state.dart';
 
 class AppState {
   final Wait wait;

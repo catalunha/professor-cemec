@@ -5,7 +5,7 @@ import 'package:professor/module/controller/module_model.dart';
 import 'package:professor/resource/controller/resource_action.dart';
 import 'package:professor/resource/controller/resource_model.dart';
 import 'package:professor/resource/resource_page.dart';
-import 'package:professor/user/user_model.dart';
+import 'package:professor/user/controller/user_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:professor/app_state.dart';

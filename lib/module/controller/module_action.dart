@@ -5,7 +5,7 @@ import 'package:professor/app_state.dart';
 import 'package:professor/course/controller/course_action.dart';
 import 'package:professor/course/controller/course_model.dart';
 import 'package:professor/module/controller/module_model.dart';
-import 'package:professor/user/user_model.dart';
+import 'package:professor/user/controller/user_model.dart';
 
 class StreamDocsModuleAction extends ReduxAction<AppState> {
   @override

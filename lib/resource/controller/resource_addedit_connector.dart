@@ -3,7 +3,7 @@ import 'package:professor/app_state.dart';
 import 'package:professor/resource/controller/resource_action.dart';
 import 'package:professor/resource/resource_addedit_page.dart';
 import 'package:professor/resource/controller/resource_model.dart';
-import 'package:professor/upload/upload_action.dart';
+import 'package:professor/upload/controller/upload_action.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
 

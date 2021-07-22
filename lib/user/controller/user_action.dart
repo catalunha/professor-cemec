@@ -3,8 +3,8 @@ import 'package:async_redux/async_redux.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:professor/app_state.dart';
 import 'package:professor/login/controller/login_action.dart';
-import 'package:professor/user/user_model.dart';
-import 'package:professor/user/user_state.dart';
+import 'package:professor/user/controller/user_model.dart';
+import 'package:professor/user/controller/user_state.dart';
 
 class ChangeStatusFirestoreUserUserAction extends ReduxAction<AppState> {
   final StatusFirestoreUser statusFirestoreUser;

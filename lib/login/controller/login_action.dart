@@ -1,8 +1,8 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:professor/app_state.dart';
 import 'package:professor/login/controller/login_state.dart';
-import 'package:professor/user/user_action.dart';
-import 'package:professor/user/user_state.dart';
+import 'package:professor/user/controller/user_action.dart';
+import 'package:professor/user/controller/user_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 

@@ -1,8 +1,8 @@
-import 'package:professor/widget/input_file.dart';
+import 'package:professor/upload/input_file.dart';
 import 'package:flutter/material.dart';
 import 'package:async_redux/async_redux.dart';
 import 'package:professor/app_state.dart';
-import 'package:professor/upload/upload_action.dart';
+import 'package:professor/upload/controller/upload_action.dart';
 
 class InputFileConnector extends StatelessWidget {
   final String label;

@@ -4,7 +4,7 @@ import 'package:professor/login/controller/login_connector.dart';
 import 'package:professor/module/controller/module_archived_connector.dart';
 import 'package:professor/resource/controller/resource_addedit_connector.dart';
 import 'package:professor/resource/controller/resource_connector.dart';
-import 'package:professor/splash/splash_connector.dart';
+import 'package:professor/splash/controller/splash_connector.dart';
 
 class Routes {
   static final routes = {

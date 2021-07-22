@@ -6,7 +6,7 @@ import 'package:professor/course/controller/course_state.dart';
 import 'package:professor/module/controller/module_action.dart';
 import 'package:professor/module/module_card.dart';
 import 'package:professor/module/controller/module_model.dart';
-import 'package:professor/user/user_model.dart';
+import 'package:professor/user/controller/user_model.dart';
 import 'package:flutter/material.dart';
 
 class ModuleCardConnector extends StatelessWidget {

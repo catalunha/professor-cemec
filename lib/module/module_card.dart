@@ -3,7 +3,7 @@ import 'package:professor/course/controller/course_model.dart';
 import 'package:professor/module/controller/module_model.dart';
 import 'package:professor/theme/app_icon.dart';
 import 'package:professor/theme/app_text_styles.dart';
-import 'package:professor/user/user_model.dart';
+import 'package:professor/user/controller/user_model.dart';
 import 'package:flutter/material.dart';
 
 class ModuleCard extends StatelessWidget {

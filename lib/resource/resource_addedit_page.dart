@@ -3,7 +3,7 @@ import 'package:professor/resource/controller/resource_model.dart';
 import 'package:professor/theme/app_icon.dart';
 import 'package:professor/widget/input_checkboxDelete.dart';
 import 'package:professor/widget/input_description.dart';
-import 'package:professor/widget/input_file_connector.dart';
+import 'package:professor/upload/controller/input_file_connector.dart';
 import 'package:professor/widget/input_title.dart';
 import 'package:flutter/material.dart';
 import 'package:professor/widget/input_url.dart';

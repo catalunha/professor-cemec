@@ -6,7 +6,7 @@ import 'package:professor/resource/controller/resource_model.dart';
 import 'package:professor/theme/app_colors.dart';
 import 'package:professor/theme/app_icon.dart';
 import 'package:professor/theme/app_text_styles.dart';
-import 'package:professor/user/user_model.dart';
+import 'package:professor/user/controller/user_model.dart';
 import 'package:flutter/material.dart';
 
 class ResourcePage extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:professor/theme/app_icon.dart';
-import 'package:professor/user/user_model.dart';
+import 'package:professor/user/controller/user_model.dart';
 import 'package:flutter/material.dart';
 
 class CoordinatorTile extends StatelessWidget {
