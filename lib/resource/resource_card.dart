@@ -1,5 +1,6 @@
 import 'package:professor/resource/controller/resource_model.dart';
 import 'package:flutter/material.dart';
+import 'package:professor/resource/resource_tile.dart';
 import 'package:professor/theme/app_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -17,24 +18,11 @@ class ResourceCard extends StatelessWidget {
       elevation: 10,
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
+        // mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          ListTile(
-            leading: resourceModel.url != null && resourceModel.url!.isNotEmpty
-                ? Icon(AppIconData.linkOn)
-                : Icon(AppIconData.linkOff),
-            title: Text('${resourceModel.title}'),
-            subtitle: Text('${resourceModel.description}'),
-            onTap: resourceModel.url != null && resourceModel.url!.isNotEmpty
-                ? () async {
-                    bool can = await canLaunch(resourceModel.url!);
-                    if (can) {
-                      await launch(resourceModel.url!);
-                    }
-                  }
-                : null,
+          ResourceTile(
+            resourceModel: resourceModel,
           ),
-          Text(resourceModel.id),
           Wrap(
             children: [
               IconButton(

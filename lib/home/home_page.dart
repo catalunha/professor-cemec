@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 class HomePage extends StatelessWidget {
   final String photoUrl;
   final String displayName;
-  final String phoneNumber;
   final String email;
   final String uid;
   final String id;
@@ -19,7 +18,6 @@ class HomePage extends StatelessWidget {
     required this.photoUrl,
     required this.displayName,
     required this.signOut,
-    required this.phoneNumber,
     required this.email,
     required this.moduleModelList,
     required this.uid,
@@ -29,9 +27,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(125),
+        preferredSize: Size.fromHeight(80),
         child: Container(
-          height: 110,
+          // height: 110,
           color: AppColors.primary,
           child: Column(
             children: [
@@ -47,18 +45,25 @@ class HomePage extends StatelessWidget {
                   ),
                   subtitle: Text('Môdulos em que você é PROFESSOR(A).'),
                   trailing: Tooltip(
-                    message:
-                        'email: $email\nMobile: $phoneNumber\nuid: ${uid.substring(0, 7)}\nid: ${id.substring(0, 7)}',
-                    child: Container(
-                      height: 48,
-                      width: 48,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        image: DecorationImage(
-                          image: NetworkImage(photoUrl),
-                        ),
+                    message: 'email: $email\nid: $id\nuid: $uid',
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.network(
+                        photoUrl,
+                        height: 58,
+                        width: 58,
                       ),
                     ),
+                    // child: Container(
+                    //   height: 48,
+                    //   width: 48,
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(5),
+                    //     image: DecorationImage(
+                    //       image: NetworkImage(photoUrl),
+                    //     ),
+                    //   ),
+                    // ),
                   ),
                 ),
               ),

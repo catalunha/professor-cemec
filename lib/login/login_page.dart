@@ -33,8 +33,8 @@ class LoginPage extends StatelessWidget {
                   SizedBox(height: 50),
                   Image.asset(
                     AppImages.person,
-                    // width: 208,
-                    // height: 273,
+                    width: 208,
+                    height: 273,
                   ),
                   SizedBox(height: 10),
                   Padding(

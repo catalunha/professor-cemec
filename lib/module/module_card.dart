@@ -1,10 +1,12 @@
-import 'package:professor/coordinator/coordinator_card.dart';
+import 'package:professor/coordinator/coordinator_tile.dart';
 import 'package:professor/course/controller/course_model.dart';
+import 'package:professor/course/course_tile.dart';
 import 'package:professor/module/controller/module_model.dart';
 import 'package:professor/theme/app_icon.dart';
 import 'package:professor/theme/app_text_styles.dart';
 import 'package:professor/user/controller/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:professor/widget/text_description.dart';
 
 class ModuleCard extends StatelessWidget {
   final ModuleModel moduleModel;
@@ -34,79 +36,77 @@ class ModuleCard extends StatelessWidget {
           Container(
             width: double.infinity,
             alignment: Alignment.topCenter,
-            child:
-                Text('${moduleModel.title}', style: AppTextStyles.trailingBold),
+            child: Text(
+              '${moduleModel.title}',
+              style: AppTextStyles.trailingBold,
+            ),
             color: Colors.blue.shade50,
           ),
-          courseModel != null
-              ? ListTile(
-                  leading: courseModel!.iconUrl == null
-                      ? Icon(AppIconData.undefined)
-                      : Container(
-                          height: 48,
-                          width: 48,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            image: DecorationImage(
-                              image: NetworkImage(courseModel!.iconUrl!),
-                            ),
-                          ),
-                        ),
-                  title: Text(courseModel!.title),
-                )
-              : Container(),
-          coordinator != null
-              ? CoordinatorTile(coordinator: coordinator!)
-              : ListTile(
-                  leading: Icon(AppIconData.undefined),
-                ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: RichText(
-                text: TextSpan(
-                  style: DefaultTextStyle.of(context).style,
-                  children: [
-                    TextSpan(
-                        text: 'Descrição: ',
-                        style: AppTextStyles.captionBoldBody),
-                    TextSpan(
-                      text: '${moduleModel.description}',
-                    )
-                  ],
-                ),
-              ),
-            ),
+          CourseTile(
+            courseModel: courseModel,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: RichText(
-                text: TextSpan(
-                  style: DefaultTextStyle.of(context).style,
-                  children: [
-                    TextSpan(
-                        text: 'Ementa: ', style: AppTextStyles.captionBoldBody),
-                    TextSpan(
-                      text: '${moduleModel.syllabus}',
-                    )
-                  ],
-                ),
-              ),
-            ),
+          CoordinatorTile(
+            coordinator: coordinator,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                '${moduleModel.id}',
-                // textAlign: TextAlign.start,
-              ),
-            ),
+          TextDescription(
+            firstWord: 'Descrição: ',
+            text: moduleModel.description,
           ),
+          TextDescription(
+            firstWord: 'Ementa: ',
+            text: moduleModel.syllabus,
+          ),
+          TextDescription(
+            firstWord: 'moduleId: ',
+            text: moduleModel.id,
+          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 10),
+          //   child: Align(
+          //     alignment: Alignment.topLeft,
+          //     child: RichText(
+          //       text: TextSpan(
+          //         style: DefaultTextStyle.of(context).style,
+          //         children: [
+          //           TextSpan(
+          //               text: 'Descrição: ',
+          //               style: AppTextStyles.captionBoldBody),
+          //           TextSpan(
+          //             text: '${moduleModel.description}',
+          //           )
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 10),
+          //   child: Align(
+          //     alignment: Alignment.topLeft,
+          //     child: RichText(
+          //       text: TextSpan(
+          //         style: DefaultTextStyle.of(context).style,
+          //         children: [
+          //           TextSpan(
+          //               text: 'Ementa: ', style: AppTextStyles.captionBoldBody),
+          //           TextSpan(
+          //             text: '${moduleModel.syllabus}',
+          //           )
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 10),
+          //   child: Align(
+          //     alignment: Alignment.topLeft,
+          //     child: Text(
+          //       '${moduleModel.id}',
+          //       // textAlign: TextAlign.start,
+          //     ),
+          //   ),
+          // ),
           Wrap(
             spacing: 50,
             children: [

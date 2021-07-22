@@ -1,5 +1,6 @@
-import 'package:professor/coordinator/coordinator_card.dart';
+import 'package:professor/coordinator/coordinator_tile.dart';
 import 'package:professor/course/controller/course_model.dart';
+import 'package:professor/course/course_tile.dart';
 import 'package:professor/module/controller/module_model.dart';
 import 'package:professor/resource/resource_card.dart';
 import 'package:professor/resource/controller/resource_model.dart';
@@ -47,32 +48,12 @@ class _ResourcePageState extends State<ResourcePage> {
               elevation: 10,
               child: Column(
                 children: [
-                  widget.courseModel != null
-                      ? ListTile(
-                          leading: widget.courseModel!.iconUrl == null
-                              ? Icon(AppIconData.undefined)
-                              : Container(
-                                  height: 48,
-                                  width: 48,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    image: DecorationImage(
-                                      image: NetworkImage(
-                                          widget.courseModel!.iconUrl!),
-                                    ),
-                                  ),
-                                ),
-                          title: Text(widget.courseModel!.title),
-                          subtitle: Text(widget.courseModel!.id),
-                        )
-                      : ListTile(
-                          leading: Icon(AppIconData.undefined),
-                        ),
-                  widget.coordinator != null
-                      ? CoordinatorTile(coordinator: widget.coordinator!)
-                      : ListTile(
-                          leading: Icon(AppIconData.undefined),
-                        ),
+                  CourseTile(
+                    courseModel: widget.courseModel,
+                  ),
+                  CoordinatorTile(
+                    coordinator: widget.coordinator,
+                  ),
                 ],
               ),
             ),
