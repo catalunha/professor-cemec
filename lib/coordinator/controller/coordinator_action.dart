@@ -1,6 +1,6 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:professor/app_state.dart';
-import 'package:professor/coordinator/coordinator_state.dart';
+import 'package:professor/coordinator/controller/coordinator_state.dart';
 
 class SetCoordinatorCurrentCoordinatorAction extends ReduxAction<AppState> {
   final String? id;

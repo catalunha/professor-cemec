@@ -1,9 +1,9 @@
 import 'package:async_redux/async_redux.dart';
-import 'package:professor/course/course_model.dart';
-import 'package:professor/module/module_action.dart';
-import 'package:professor/module/module_model.dart';
-import 'package:professor/resource/resource_action.dart';
-import 'package:professor/resource/resource_model.dart';
+import 'package:professor/course/controller/course_model.dart';
+import 'package:professor/module/controller/module_action.dart';
+import 'package:professor/module/controller/module_model.dart';
+import 'package:professor/resource/controller/resource_action.dart';
+import 'package:professor/resource/controller/resource_model.dart';
 import 'package:professor/resource/resource_page.dart';
 import 'package:professor/user/user_model.dart';
 import 'package:flutter/material.dart';

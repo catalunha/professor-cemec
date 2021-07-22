@@ -1,9 +1,9 @@
 import 'package:async_redux/async_redux.dart';
-import 'package:professor/coordinator/coordinator_state.dart';
-import 'package:professor/course/course_state.dart';
-import 'package:professor/login/login_state.dart';
-import 'package:professor/module/module_state.dart';
-import 'package:professor/resource/resource_state.dart';
+import 'package:professor/coordinator/controller/coordinator_state.dart';
+import 'package:professor/course/controller/course_state.dart';
+import 'package:professor/login/controller/login_state.dart';
+import 'package:professor/module/controller/module_state.dart';
+import 'package:professor/resource/controller/resource_state.dart';
 import 'package:professor/upload/upload_state.dart';
 import 'package:professor/user/user_state.dart';
 

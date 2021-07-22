@@ -1,5 +1,5 @@
 import 'package:professor/app_state.dart';
-import 'package:professor/course/course_model.dart';
+import 'package:professor/course/controller/course_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:collection/collection.dart';
 

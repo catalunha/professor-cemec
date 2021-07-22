@@ -1,5 +1,5 @@
-import 'package:professor/resource/resource_addedit_connector.dart';
-import 'package:professor/resource/resource_model.dart';
+import 'package:professor/resource/controller/resource_addedit_connector.dart';
+import 'package:professor/resource/controller/resource_model.dart';
 import 'package:professor/theme/app_icon.dart';
 import 'package:professor/widget/input_checkboxDelete.dart';
 import 'package:professor/widget/input_description.dart';

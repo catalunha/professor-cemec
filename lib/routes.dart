@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:professor/home/home_page_connector.dart';
-import 'package:professor/login/login_connector.dart';
-import 'package:professor/module/module_archived_connector.dart';
-import 'package:professor/resource/resource_addedit_connector.dart';
-import 'package:professor/resource/resource_connector.dart';
+import 'package:professor/home/controller/home_page_connector.dart';
+import 'package:professor/login/controller/login_connector.dart';
+import 'package:professor/module/controller/module_archived_connector.dart';
+import 'package:professor/resource/controller/resource_addedit_connector.dart';
+import 'package:professor/resource/controller/resource_connector.dart';
 import 'package:professor/splash/splash_connector.dart';
 
 class Routes {

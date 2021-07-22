@@ -1,12 +1,12 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:professor/app_state.dart';
 import 'package:professor/home/home_page.dart';
-import 'package:professor/login/login_action.dart';
+import 'package:professor/login/controller/login_action.dart';
 
 import 'package:flutter/material.dart';
-import 'package:professor/module/module_action.dart';
-import 'package:professor/module/module_model.dart';
-import 'package:professor/module/module_state.dart';
+import 'package:professor/module/controller/module_action.dart';
+import 'package:professor/module/controller/module_model.dart';
+import 'package:professor/module/controller/module_state.dart';
 
 class HomePageConnector extends StatelessWidget {
   const HomePageConnector({Key? key}) : super(key: key);

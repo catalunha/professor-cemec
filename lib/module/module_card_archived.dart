@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:professor/module/module_model.dart';
+import 'package:professor/module/controller/module_model.dart';
 import 'package:professor/theme/app_icon.dart';
 
 class ModuleCardArchived extends StatelessWidget {

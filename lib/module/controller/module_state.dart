@@ -1,5 +1,5 @@
 import 'package:professor/app_state.dart';
-import 'package:professor/module/module_model.dart';
+import 'package:professor/module/controller/module_model.dart';
 import 'package:flutter/foundation.dart';
 
 class ModuleState {

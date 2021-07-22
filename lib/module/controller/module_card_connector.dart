@@ -1,11 +1,11 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:professor/app_state.dart';
-import 'package:professor/coordinator/coordinator_state.dart';
-import 'package:professor/course/course_model.dart';
-import 'package:professor/course/course_state.dart';
-import 'package:professor/module/module_action.dart';
+import 'package:professor/coordinator/controller/coordinator_state.dart';
+import 'package:professor/course/controller/course_model.dart';
+import 'package:professor/course/controller/course_state.dart';
+import 'package:professor/module/controller/module_action.dart';
 import 'package:professor/module/module_card.dart';
-import 'package:professor/module/module_model.dart';
+import 'package:professor/module/controller/module_model.dart';
 import 'package:professor/user/user_model.dart';
 import 'package:flutter/material.dart';
 

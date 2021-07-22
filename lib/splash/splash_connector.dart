@@ -1,9 +1,9 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:professor/app_state.dart';
-import 'package:professor/home/home_page_connector.dart';
-import 'package:professor/login/login_action.dart';
-import 'package:professor/login/login_connector.dart';
-import 'package:professor/login/login_state.dart';
+import 'package:professor/home/controller/home_page_connector.dart';
+import 'package:professor/login/controller/login_action.dart';
+import 'package:professor/login/controller/login_connector.dart';
+import 'package:professor/login/controller/login_state.dart';
 import 'package:professor/splash/splash_page.dart';
 import 'package:professor/user/user_state.dart';
 import 'package:flutter/material.dart';

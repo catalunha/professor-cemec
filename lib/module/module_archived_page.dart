@@ -1,5 +1,5 @@
 import 'package:professor/module/module_card_archived.dart';
-import 'package:professor/module/module_model.dart';
+import 'package:professor/module/controller/module_model.dart';
 import 'package:flutter/material.dart';
 
 class ModuleArchivedPage extends StatelessWidget {

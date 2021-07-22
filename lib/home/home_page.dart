@@ -1,5 +1,5 @@
-import 'package:professor/module/module_card_connector.dart';
-import 'package:professor/module/module_model.dart';
+import 'package:professor/module/controller/module_card_connector.dart';
+import 'package:professor/module/controller/module_model.dart';
 import 'package:professor/theme/app_colors.dart';
 import 'package:professor/theme/app_icon.dart';
 import 'package:professor/theme/app_text_styles.dart';
