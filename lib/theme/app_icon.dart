@@ -20,8 +20,14 @@ class AppIconData {
   static const check = Icons.check;
   static const delete = Icons.delete_forever_outlined;
 
+  static const people = Icons.people;
+  static const coordinator = Icons.badge_outlined;
+  static const teacher = Icons.assignment_ind_outlined;
+  static const administrator = Icons.manage_accounts_outlined;
+  static const student = Icons.sentiment_satisfied_alt_outlined;
+
   static const module = Icons.book_outlined;
   static const resourse = Icons.local_library_outlined;
 
-  void test = Icon(Icons.text_snippet_outlined);
+  void test = Icon(Icons.sentiment_satisfied_alt_outlined);
 }
