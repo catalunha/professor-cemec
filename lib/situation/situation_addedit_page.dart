@@ -21,7 +21,18 @@ class SituationAddEditPage extends StatefulWidget {
 }
 
 enum ChoiceOrReport { choice, report }
+enum Options { sim, nao, a, b, c, d, e }
+// extension OptionsExtension on Options {
+//   static const names = {
+//     Options.sim: 'Sim',
+//     Options.n: 'Sim',
+//     Options.sim: 'Sim',
+//     Options.sim: 'Sim',
+//     Options.sim: 'Sim',
 
+//   };
+//   String get name => names[this]!;
+// }
 class _SituationAddEditPageState extends State<SituationAddEditPage> {
   final FormController formController;
   ChoiceOrReport? choiceOrReportSelected;
@@ -47,6 +58,7 @@ class _SituationAddEditPageState extends State<SituationAddEditPage> {
         child: Form(
             key: formController.formKey,
             child: Column(
+              // mainAxisSize: MainAxisSize.min,
               children: [
                 InputTitle(
                   label: 'Título da situação',
@@ -107,8 +119,63 @@ class _SituationAddEditPageState extends State<SituationAddEditPage> {
                   },
                 ),
                 choiceOrReportSelected == ChoiceOrReport.choice
-                    ? Container(
-                        color: Colors.red,
+                    ? Column(
+                        // mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // Divider(),
+                          Container(
+                            width: double.infinity,
+                            alignment: Alignment.topCenter,
+                            child: Text('Clique nas opções que deseja'),
+                            color: Colors.black12,
+                          ),
+                          Wrap(
+                            children: [
+                              IconButton(
+                                onPressed: () => addorRemoveItem('Sim'),
+                                icon: Text('Sim'),
+                              ),
+                              IconButton(
+                                  onPressed: () => addorRemoveItem('Não'),
+                                  icon: Text('Não')),
+                              IconButton(
+                                  onPressed: () => addorRemoveItem('A'),
+                                  icon: Text('A')),
+                              IconButton(
+                                  onPressed: () => addorRemoveItem('B'),
+                                  icon: Text('B')),
+                              IconButton(
+                                  onPressed: () => addorRemoveItem('C'),
+                                  icon: Text('C')),
+                              IconButton(
+                                  onPressed: () => addorRemoveItem('D'),
+                                  icon: Text('D')),
+                              IconButton(
+                                  onPressed: () => addorRemoveItem('E'),
+                                  icon: Text('E')),
+                            ],
+                          ),
+                          SingleChildScrollView(
+                            child: Column(
+                              children: buildItens(context),
+                            ),
+                          ),
+                          // buildItens(context),
+                          // Container(
+                          //   height: 100,
+                          //   child: ReorderableListView(
+                          //     scrollDirection: Axis.vertical,
+                          //     onReorder: _onReorder,
+                          //     children: buildItens(context),
+                          //   ),
+                          // ),
+                          Container(
+                            width: double.infinity,
+                            alignment: Alignment.topCenter,
+                            child: Text('======='),
+                            color: Colors.black12,
+                          ),
+                        ],
                       )
                     : Container(),
                 SizedBox(
@@ -129,4 +196,76 @@ class _SituationAddEditPageState extends State<SituationAddEditPage> {
       ),
     );
   }
+
+  addorRemoveItem(String item) {
+    List<String> temp = formController.situationModel.options!;
+    if (temp.contains(item)) {
+      temp.remove(item);
+    } else {
+      temp.add(item);
+    }
+    formController.onChange(options: temp);
+    setState(() {});
+  }
+
+  buildItens(context) {
+    List<Widget> list = [];
+    // Map<String, String> map = Map.fromIterable(
+    //   widget.formController.situationModel.options!,
+    //   key: (element) => element.id,
+    //   value: (element) => element,
+    // );
+    for (var index in widget.formController.situationModel.options!) {
+      // if (map[index] != null) {
+      // list.add(
+      //   Container(
+      //     key: ValueKey(index),
+      //     child: Text(index),
+      //   ),
+      // );
+      // }
+      list.add(RadioListTile(
+        value: index,
+        groupValue: widget.formController.situationModel.options!,
+        onChanged: (ind) => setState(() {
+          formController.onChange(choice: index);
+        }),
+        title: Text(index),
+      ));
+    }
+    setState(() {});
+    return list;
+  }
+
+  // buildItens(context) {
+  //   return ListView.builder(
+  //     itemBuilder: (context, index) {
+  //       return RadioListTile(
+  //         value: index,
+  //         groupValue: widget.formController.situationModel.options![index],
+  //         onChanged: (ind) => setState(() {
+  //           formController.onChange(
+  //               choice: widget.formController.situationModel.options![index]);
+  //         }),
+  //         title:
+  //             Text('${widget.formController.situationModel.options![index]}'),
+  //       );
+  //     },
+  //     itemCount: widget.formController.situationModel.options!.length,
+  //   );
+  // }
+
+  // void _onReorder(int oldIndex, int newIndex) {
+  //   setState(() {
+  //     if (newIndex > oldIndex) {
+  //       newIndex -= 1;
+  //     }
+  //   });
+  //   List<String> optionsTemp = widget.formController.situationModel.options!;
+  //   String resourceId = optionsTemp[oldIndex];
+  //   optionsTemp.removeAt(oldIndex);
+  //   optionsTemp.insert(newIndex, resourceId);
+  //   formController.onChange(options: optionsTemp);
+  //   // widget.onChangeChoiceOrder(resourceOrderTemp);
+  // }
 }

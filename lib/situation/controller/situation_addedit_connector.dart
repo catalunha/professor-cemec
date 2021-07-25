@@ -77,7 +77,9 @@ class FormController {
     String? proposalUrl,
     String? solutionUrl,
     String? type,
+    String? choice,
     bool? isDeleted,
+    List<String>? options,
   }) {
     situationModel = situationModel.copyWith(
       title: title,
@@ -85,6 +87,8 @@ class FormController {
       proposalUrl: proposalUrl,
       solutionUrl: solutionUrl,
       isDeleted: isDeleted,
+      options: options,
+      choice: choice,
     );
     print('==--> FormController.onChange: $situationModel');
   }
