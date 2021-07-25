@@ -105,6 +105,7 @@ class _SituationAddEditPageState extends State<SituationAddEditPage> {
                   onChanged: (ChoiceOrReport? value) {
                     setState(() {
                       choiceOrReportSelected = value;
+                      formController.onChange(type: 'report');
                     });
                   },
                 ),
@@ -115,6 +116,7 @@ class _SituationAddEditPageState extends State<SituationAddEditPage> {
                   onChanged: (ChoiceOrReport? value) {
                     setState(() {
                       choiceOrReportSelected = value;
+                      formController.onChange(type: 'choice');
                     });
                   },
                 ),
@@ -224,10 +226,10 @@ class _SituationAddEditPageState extends State<SituationAddEditPage> {
       //   ),
       // );
       // }
-      list.add(RadioListTile(
+      list.add(RadioListTile<String>(
         value: index,
-        groupValue: widget.formController.situationModel.options!,
-        onChanged: (ind) => setState(() {
+        groupValue: widget.formController.situationModel.choice,
+        onChanged: (index) => setState(() {
           formController.onChange(choice: index);
         }),
         title: Text(index),

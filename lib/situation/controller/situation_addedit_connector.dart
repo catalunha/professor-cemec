@@ -88,6 +88,7 @@ class FormController {
       solutionUrl: solutionUrl,
       isDeleted: isDeleted,
       options: options,
+      type: type,
       choice: choice,
     );
     print('==--> FormController.onChange: $situationModel');
