@@ -1,41 +1,41 @@
+import 'package:flutter/material.dart';
 import 'package:professor/coordinator/coordinator_tile.dart';
+
 import 'package:professor/course/controller/course_model.dart';
 import 'package:professor/course/course_tile.dart';
 import 'package:professor/module/controller/module_model.dart';
-import 'package:professor/resource/resource_card.dart';
-import 'package:professor/resource/controller/resource_model.dart';
+import 'package:professor/situation/controller/situation_model.dart';
+import 'package:professor/situation/situation_card.dart';
 import 'package:professor/theme/app_colors.dart';
 import 'package:professor/theme/app_icon.dart';
 import 'package:professor/theme/app_text_styles.dart';
 import 'package:professor/user/controller/user_model.dart';
-import 'package:flutter/material.dart';
 
-class ResourcePage extends StatefulWidget {
-  final UserModel? coordinator;
+class SituationPage extends StatefulWidget {
   final CourseModel? courseModel;
+  final UserModel? coordinator;
   final ModuleModel moduleModel;
-  final List<ResourceModel> resourceModelList;
-  final Function(List<String>) onChangeResourceOrder;
-
-  const ResourcePage({
+  final List<SituationModel> situationList;
+  final Function(List<String>) onChangeSituationOrder;
+  const SituationPage({
     Key? key,
-    required this.resourceModelList,
-    required this.courseModel,
-    required this.moduleModel,
+    this.courseModel,
     this.coordinator,
-    required this.onChangeResourceOrder,
+    required this.moduleModel,
+    required this.situationList,
+    required this.onChangeSituationOrder,
   }) : super(key: key);
 
   @override
-  _ResourcePageState createState() => _ResourcePageState();
+  _SituationPageState createState() => _SituationPageState();
 }
 
-class _ResourcePageState extends State<ResourcePage> {
+class _SituationPageState extends State<SituationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Recursos deste môdulo'),
+        title: Text('Situações para este môdulo'),
       ),
       body: Column(
         children: [
@@ -87,7 +87,7 @@ class _ResourcePageState extends State<ResourcePage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(AppIconData.addInCloud),
         onPressed: () async {
-          Navigator.pushNamed(context, '/resource_addedit', arguments: '');
+          Navigator.pushNamed(context, '/situation_addedit', arguments: '');
         },
       ),
     );
@@ -95,16 +95,16 @@ class _ResourcePageState extends State<ResourcePage> {
 
   buildItens(context) {
     List<Widget> list = [];
-    Map<String, ResourceModel> map = Map.fromIterable(
-      widget.resourceModelList,
+    Map<String, SituationModel> map = Map.fromIterable(
+      widget.situationList,
       key: (element) => element.id,
       value: (element) => element,
     );
-    for (var index in widget.moduleModel.resourceOrder!) {
+    for (var index in widget.moduleModel.situationOrder!) {
       if (map[index] != null) {
         list.add(Container(
             key: ValueKey(index),
-            child: ResourceCard(resourceModel: map[index]!)));
+            child: SituationCard(situationModel: map[index]!)));
       }
     }
     setState(() {});
@@ -117,10 +117,10 @@ class _ResourcePageState extends State<ResourcePage> {
         newIndex -= 1;
       }
     });
-    List<String> resourceOrderTemp = widget.moduleModel.resourceOrder!;
-    String resourceId = resourceOrderTemp[oldIndex];
-    resourceOrderTemp.removeAt(oldIndex);
-    resourceOrderTemp.insert(newIndex, resourceId);
-    widget.onChangeResourceOrder(resourceOrderTemp);
+    List<String> situationOrderTemp = widget.moduleModel.situationOrder!;
+    String situationId = situationOrderTemp[oldIndex];
+    situationOrderTemp.removeAt(oldIndex);
+    situationOrderTemp.insert(newIndex, situationId);
+    widget.onChangeSituationOrder(situationOrderTemp);
   }
 }

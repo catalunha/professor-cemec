@@ -4,6 +4,8 @@ import 'package:professor/course/controller/course_state.dart';
 import 'package:professor/login/controller/login_state.dart';
 import 'package:professor/module/controller/module_state.dart';
 import 'package:professor/resource/controller/resource_state.dart';
+import 'package:professor/situation/controller/situation_model.dart';
+import 'package:professor/situation/controller/situation_state.dart';
 import 'package:professor/upload/controller/upload_state.dart';
 import 'package:professor/user/controller/user_state.dart';
 
@@ -16,6 +18,7 @@ class AppState {
   final CourseState courseState;
   final ModuleState moduleState;
   final ResourceState resourceState;
+  final SituationState situationState;
   AppState({
     required this.wait,
     required this.loginState,
@@ -25,6 +28,7 @@ class AppState {
     required this.courseState,
     required this.moduleState,
     required this.resourceState,
+    required this.situationState,
   });
 
   static AppState initialState() => AppState(
@@ -36,6 +40,7 @@ class AppState {
         courseState: CourseState.initialState(),
         moduleState: ModuleState.initialState(),
         resourceState: ResourceState.initialState(),
+        situationState: SituationState.initialState(),
       );
   AppState copyWith({
     Wait? wait,
@@ -46,6 +51,7 @@ class AppState {
     CourseState? courseState,
     ModuleState? moduleState,
     ResourceState? resourceState,
+    SituationState? situationState,
   }) {
     return AppState(
       wait: wait ?? this.wait,
@@ -56,6 +62,7 @@ class AppState {
       courseState: courseState ?? this.courseState,
       moduleState: moduleState ?? this.moduleState,
       resourceState: resourceState ?? this.resourceState,
+      situationState: situationState ?? this.situationState,
     );
   }
 
@@ -71,6 +78,7 @@ class AppState {
         other.coordinatorState == coordinatorState &&
         other.userState == userState &&
         other.resourceState == resourceState &&
+        other.situationState == situationState &&
         other.wait == wait;
   }
 
@@ -83,6 +91,7 @@ class AppState {
         userState.hashCode ^
         coordinatorState.hashCode ^
         resourceState.hashCode ^
+        situationState.hashCode ^
         wait.hashCode;
   }
 }

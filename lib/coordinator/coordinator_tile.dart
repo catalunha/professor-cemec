@@ -37,7 +37,10 @@ class CoordinatorTile extends StatelessWidget {
             title: Text(coordinator!.displayName ?? ''),
             subtitle: Text(
                 'email: ${coordinator!.email}\nuserId: ${coordinator!.id}'),
-            trailing: Icon(AppIconData.coordinator),
+            trailing: Icon(
+              AppIconData.coordinator,
+              color: Colors.blue,
+            ),
           )
         : ListTile(
             leading: Icon(

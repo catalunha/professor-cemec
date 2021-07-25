@@ -5,6 +5,7 @@ import 'package:professor/app_state.dart';
 import 'package:professor/course/controller/course_action.dart';
 import 'package:professor/course/controller/course_model.dart';
 import 'package:professor/module/controller/module_model.dart';
+import 'package:professor/situation/controller/situation_action.dart';
 import 'package:professor/user/controller/user_model.dart';
 
 class StreamDocsModuleAction extends ReduxAction<AppState> {
@@ -188,6 +189,33 @@ class UpdateResourceOrderModuleAction extends ReduxAction<AppState> {
     } else {
       await docRef.update({
         'resourceOrder': FieldValue.arrayRemove([id])
+      });
+    }
+    return null;
+  }
+}
+
+class UpdateSituationOrderModuleAction extends ReduxAction<AppState> {
+  final String id;
+  final bool isUnionOrRemove;
+  UpdateSituationOrderModuleAction({
+    required this.id,
+    required this.isUnionOrRemove,
+  });
+  @override
+  Future<AppState?> reduce() async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    DocumentReference docRef = firebaseFirestore
+        .collection(ModuleModel.collection)
+        .doc(state.moduleState.moduleModelCurrent!.id);
+
+    if (isUnionOrRemove) {
+      await docRef.update({
+        'situationOrder': FieldValue.arrayUnion([id])
+      });
+    } else {
+      await docRef.update({
+        'situationOrder': FieldValue.arrayRemove([id])
       });
     }
     return null;

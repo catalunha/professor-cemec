@@ -4,6 +4,8 @@ import 'package:professor/login/controller/login_connector.dart';
 import 'package:professor/module/controller/module_archived_connector.dart';
 import 'package:professor/resource/controller/resource_addedit_connector.dart';
 import 'package:professor/resource/controller/resource_connector.dart';
+import 'package:professor/situation/controller/situation_addedit_connector.dart';
+import 'package:professor/situation/controller/situation_connector.dart';
 import 'package:professor/splash/controller/splash_connector.dart';
 
 class Routes {
@@ -16,6 +18,12 @@ class Routes {
           moduleId: ModalRoute.of(context)!.settings.arguments.toString(),
         ),
     '/resource_addedit': (BuildContext context) => ResourceAddEditConnector(
+          addOrEditId: ModalRoute.of(context)!.settings.arguments.toString(),
+        ),
+    '/situation': (BuildContext context) => SituationConnector(
+          moduleId: ModalRoute.of(context)!.settings.arguments.toString(),
+        ),
+    '/situation_addedit': (BuildContext context) => SituationAddEditConnector(
           addOrEditId: ModalRoute.of(context)!.settings.arguments.toString(),
         ),
   };

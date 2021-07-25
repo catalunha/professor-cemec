@@ -15,6 +15,7 @@ class ModuleModel extends FirestoreModel {
   final bool isDeleted; //for prof use
   final String? teacherUserId; // User.id
   final List<String>? resourceOrder;
+  final List<String>? situationOrder;
   ModuleModel(
     String id, {
     required this.courseId,
@@ -25,6 +26,7 @@ class ModuleModel extends FirestoreModel {
     required this.isDeleted,
     this.teacherUserId,
     this.resourceOrder,
+    this.situationOrder,
   }) : super(id);
 
   ModuleModel copyWith({
@@ -37,6 +39,7 @@ class ModuleModel extends FirestoreModel {
     String? teacherUserId,
     bool teacherUserIdNull = false,
     List<String>? resourceOrder,
+    List<String>? situationOrder,
   }) {
     return ModuleModel(
       this.id,
@@ -49,6 +52,7 @@ class ModuleModel extends FirestoreModel {
       teacherUserId:
           teacherUserIdNull ? null : teacherUserId ?? this.teacherUserId,
       resourceOrder: resourceOrder ?? this.resourceOrder,
+      situationOrder: situationOrder ?? this.situationOrder,
     );
   }
 
@@ -65,6 +69,9 @@ class ModuleModel extends FirestoreModel {
       resourceOrder: map['resourceOrder'] == null
           ? []
           : List<String>.from(map['resourceOrder']),
+      situationOrder: map['situationOrder'] == null
+          ? []
+          : List<String>.from(map['situationOrder']),
     );
   }
   factory ModuleModel.fromJson(String id, String source) =>
@@ -80,6 +87,7 @@ class ModuleModel extends FirestoreModel {
       'isArchivedByProf': isArchivedByProf,
       'isDeleted': isDeleted,
       'resourceOrder': resourceOrder,
+      'situationOrder': situationOrder,
     };
   }
 
@@ -102,7 +110,8 @@ class ModuleModel extends FirestoreModel {
         other.teacherUserId == teacherUserId &&
         other.isArchivedByProf == isArchivedByProf &&
         other.isDeleted == isDeleted &&
-        listEquals(other.resourceOrder, resourceOrder);
+        listEquals(other.resourceOrder, resourceOrder) &&
+        listEquals(other.situationOrder, situationOrder);
   }
 
   @override
@@ -114,6 +123,7 @@ class ModuleModel extends FirestoreModel {
         teacherUserId.hashCode ^
         isArchivedByProf.hashCode ^
         isDeleted.hashCode ^
+        situationOrder.hashCode ^
         resourceOrder.hashCode;
   }
 }

@@ -119,6 +119,14 @@ class ModuleCard extends StatelessWidget {
                 },
               ),
               IconButton(
+                tooltip: 'Editar situações para este môdulo',
+                icon: Icon(AppIconData.situation),
+                onPressed: () async {
+                  Navigator.pushNamed(context, '/situation',
+                      arguments: moduleModel.id);
+                },
+              ),
+              IconButton(
                 tooltip: 'Arquivar este môdulo',
                 icon: Icon(AppIconData.archived),
                 onPressed: onArchiveModule,
