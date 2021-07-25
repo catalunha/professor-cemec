@@ -37,6 +37,12 @@ class SituationAddEditFactory
         onSave: (SituationModel situationModel) {
           situationModel = situationModel.copyWith(
               moduleId: state.moduleState.moduleModelCurrent!.id);
+          if (situationModel.type == 'report') {
+            situationModel = situationModel.copyWith(
+              choiceIsNull: true,
+              optionsIsNull: true,
+            );
+          }
           if (widget!.addOrEditId.isEmpty) {
             dispatch(CreateDocSituationAction(situationModel: situationModel));
           } else {
@@ -66,6 +72,18 @@ class FormController {
   });
   String? validateRequiredText(String? value) =>
       value?.isEmpty ?? true ? 'Este campo não pode ser vazio.' : null;
+  String? validateUrl(String? value) {
+    print('validando url');
+    if (value!.isEmpty) {
+      return 'Este campo não pode ser vazio.';
+    }
+
+    if (!(Uri.tryParse(value)?.hasAbsolutePath ?? false)) {
+      return 'Este link é inválido';
+    }
+
+    return null;
+  }
 
   Future<bool> can(String url) async {
     return await canLaunch(url);
@@ -77,9 +95,9 @@ class FormController {
     String? proposalUrl,
     String? solutionUrl,
     String? type,
+    List<String>? options,
     String? choice,
     bool? isDeleted,
-    List<String>? options,
   }) {
     situationModel = situationModel.copyWith(
       title: title,

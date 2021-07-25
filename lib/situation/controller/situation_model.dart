@@ -41,6 +41,8 @@ class SituationModel extends FirestoreModel {
     List<String>? options,
     String? choice,
     bool? isDeleted,
+    bool choiceIsNull = false,
+    bool optionsIsNull = false,
   }) {
     return SituationModel(
       id,
@@ -50,9 +52,11 @@ class SituationModel extends FirestoreModel {
       proposalUrl: proposalUrl ?? this.proposalUrl,
       solutionUrl: solutionUrl ?? this.solutionUrl,
       type: type ?? this.type,
-      options: options ?? this.options,
-      choice: choice ?? this.choice,
+      // options: options ?? this.options,
+      // choice: choice ?? this.choice,
       isDeleted: isDeleted ?? this.isDeleted,
+      choice: choiceIsNull ? null : choice ?? this.choice,
+      options: optionsIsNull ? null : options ?? this.options,
     );
   }
 

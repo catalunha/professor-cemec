@@ -14,6 +14,7 @@ class AppIconData {
   static const linkOff = Icons.link_off;
   static const proposal = Icons.question_answer_outlined;
   static const solution = Icons.emoji_objects_outlined;
+  static const radio = Icons.flaky_outlined;
 
   static const title = Icons.text_format;
   static const description = Icons.text_snippet_outlined;
@@ -32,5 +33,5 @@ class AppIconData {
   static const resourse = Icons.local_library_outlined;
   static const situation = Icons.quiz_outlined;
 
-  void test = Icon(Icons.quiz_outlined);
+  void test = Icon(Icons.flaky_outlined);
 }
