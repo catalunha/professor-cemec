@@ -80,6 +80,7 @@ class _SituationAddEditPageState extends State<SituationAddEditPage> {
               ),
               InputDescription(
                 label: 'Proposta da situação',
+                icon: AppIconData.linkOn,
                 initialValue: formController.situationModel.proposalUrl,
                 validator: formController.validateUrl,
                 onChanged: (value) {
@@ -88,6 +89,7 @@ class _SituationAddEditPageState extends State<SituationAddEditPage> {
               ),
               InputDescription(
                 label: 'Solução da situação',
+                icon: AppIconData.linkOn,
                 initialValue: formController.situationModel.solutionUrl,
                 validator: formController.validateUrl,
                 onChanged: (value) {
@@ -149,30 +151,47 @@ class _SituationAddEditPageState extends State<SituationAddEditPage> {
                                 child: Text('Clique nas opções que deseja'),
                                 color: Colors.black12,
                               ),
+                              SizedBox(
+                                height: 5,
+                              ),
                               Wrap(
+                                spacing: 5,
                                 children: [
-                                  IconButton(
+                                  // ElevatedButton(
+                                  //   onPressed: null,
+                                  //   child: Text('Sim'),
+                                  // ),
+                                  ElevatedButton(
                                     onPressed: () => addorRemoveItem('Sim'),
-                                    icon: Text('Sim'),
+                                    child: Text('Sim'),
                                   ),
-                                  IconButton(
+                                  ElevatedButton(
                                       onPressed: () => addorRemoveItem('Não'),
-                                      icon: Text('Não')),
-                                  IconButton(
+                                      child: Text('Não')),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+
+                              Wrap(
+                                spacing: 5,
+                                children: [
+                                  ElevatedButton(
                                       onPressed: () => addorRemoveItem('A'),
-                                      icon: Text('A')),
-                                  IconButton(
+                                      child: Text('A')),
+                                  ElevatedButton(
                                       onPressed: () => addorRemoveItem('B'),
-                                      icon: Text('B')),
-                                  IconButton(
+                                      child: Text('B')),
+                                  ElevatedButton(
                                       onPressed: () => addorRemoveItem('C'),
-                                      icon: Text('C')),
-                                  IconButton(
+                                      child: Text('C')),
+                                  ElevatedButton(
                                       onPressed: () => addorRemoveItem('D'),
-                                      icon: Text('D')),
-                                  IconButton(
+                                      child: Text('D')),
+                                  ElevatedButton(
                                       onPressed: () => addorRemoveItem('E'),
-                                      icon: Text('E')),
+                                      child: Text('E')),
                                 ],
                               ),
                               SingleChildScrollView(

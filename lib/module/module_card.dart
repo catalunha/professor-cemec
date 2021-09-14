@@ -119,7 +119,7 @@ class ModuleCard extends StatelessWidget {
                 },
               ),
               IconButton(
-                tooltip: 'Editar situações para este môdulo',
+                tooltip: 'Ver situações para este môdulo',
                 icon: Icon(AppIconData.situation),
                 onPressed: () async {
                   Navigator.pushNamed(context, '/situation',
